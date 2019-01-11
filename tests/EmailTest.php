@@ -24,17 +24,21 @@ class EmailTest extends TestCase
 
     public function testTestaRequisicaoTrue()
     {
-        $this->assertTrue($this->email->setRequisicao("csc"));
+        $this->email->setRemetente("csc");
+        $this->assertEquals("csc", $this->email->getRemetente());
     }
 
     public function testTestaRequisicaoFalse()
     {
-        $this->assertFalse($this->email->setRequisicao("csc2"));
+        $this->email->setRemetente("csc2");
+        $this->assertEquals(NULL,
+            $this->email->getRemetente());
     }
 
     public function testDefineObjetoEmail()
     {
+        $this->email = new Email("csc");
         $this->assertInstanceOf(MailSimples::class,
-        $this->email->defineObjetoEmail("csc", "simp"));
+        $this->email->defineObjetoEmail("simp"));
     }
 }
